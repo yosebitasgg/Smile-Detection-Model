@@ -18,37 +18,40 @@ class LFWDataset(Dataset):
 
         # Read the smiling faces file and extract filenames
         with open(smiling_labels_file, 'r') as f:
-            smiling_files = [line.strip().replace('.jpg', '.ppm') for line in f if not line.strip().endswith('listt.txt')]
-
-
-        smiling_files = None # type: list
+            smiling_files = [
+                line.strip().replace('.jpg', '.ppm') 
+                for line in f.readlines() 
+                if line.strip() and not line.strip().endswith('listt.txt')
+            ]
 
         # Read the non-smiling faces file and extract filenames
         with open(non_smiling_labels_file, 'r') as f:
-            non_smiling_files = [line.strip().replace('.jpg', '.ppm') for line in f if not line.strip().endswith('listt.txt')]
-
-        non_smiling_files = None # type: list
+            non_smiling_files = [
+                line.strip().replace('.jpg', '.ppm') 
+                for line in f.readlines() 
+                if line.strip()
+            ]
 
         # Create image paths and labels
         self.image_paths = []
         self.labels = []
 
         # Add smiling faces to the dataset with label = 1
-        for file in smiling_files:
-            file_path = os.path.join(self.faces_folder, file)
-            if os.path.isfile(file_path):
-                self.image_paths.append(file_path)
+        for filename in smiling_files:
+            image_path = os.path.join(self.faces_folder, filename)
+            if os.path.isfile(image_path):
+                self.image_paths.append(image_path)
                 self.labels.append(1)
 
         # Add non-smiling faces to the dataset with label = 0
-        for file in non_smiling_files:
-            file_path = os.path.join(self.faces_folder, file)
-            if os.path.isfile(file_path):
-                self.image_paths.append(file_path)
+        for filename in non_smiling_files:
+            image_path = os.path.join(self.faces_folder, filename)
+            if os.path.isfile(image_path):
+                self.image_paths.append(image_path)
                 self.labels.append(0)
 
     def __len__(self):
-        # eturn the total number of images in the dataset
+        # Return the total number of images in the dataset
         return len(self.image_paths)
 
     def __getitem__(self, idx):
