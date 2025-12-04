@@ -1,10 +1,10 @@
 {
     "model": "RandomForest",
-    "train_accuracy": 1.0,
+    "train_accuracy": 0.9824046920821115,
     "val_accuracy": 0.8611111111111112,
     "test_accuracy": 0.8611111111111112,
-    "training_time_seconds": 0.6738481521606445,
-    "inference_time_mean_ms": 0.17547485828399656,
-    "inference_time_std_ms": 0.033416177403216986,
-    "n_parameters": 13708
+    "training_time_seconds": 0.4318702220916748,
+    "inference_time_mean_ms": 0.17387359142303468,
+    "inference_time_std_ms": 0.04000978430570201,
+    "n_parameters": 6766
 }
